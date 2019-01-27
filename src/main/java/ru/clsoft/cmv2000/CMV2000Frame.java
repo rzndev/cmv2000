@@ -22,10 +22,8 @@ public class CMV2000Frame extends JFrame {
         setSize(screenWidth / 2, screenHeight / 2);
         setLocationByPlatform(true);
 
-        JPanel mainPanel = new JPanel();
-        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
-        JScrollPane scrollPane = new JScrollPane(mainPanel);
-        getContentPane().add(scrollPane);
+        JPanel topPanel = new JPanel();
+        topPanel.setLayout(new BoxLayout(topPanel, BoxLayout.Y_AXIS));
 
         JButton buttonSend = new JButton("SEND");
         buttonSend.addActionListener(new ActionListener() {
@@ -42,7 +40,15 @@ public class CMV2000Frame extends JFrame {
                 communication.sendPacket();
             }
         });
-        mainPanel.add(buttonSend);
+        topPanel.add(buttonSend);
+
+        JPanel mainPanel = new JPanel();
+        mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
+        JScrollPane scrollPane = new JScrollPane(mainPanel);
+        topPanel.add(scrollPane);
+        getContentPane().add(topPanel);
+
+
 
         java.util.List<Object> data = config.getParameters();
         for(Object item : data) {

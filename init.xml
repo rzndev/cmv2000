@@ -2,7 +2,7 @@
 <root>
     <network ip="127.0.0.1" port="8888"/>
     <register addr="1" name="numberLines" type="integer" bitlen="16" min="1" max="1088" val="1088" step="1" bigstep="50"/>
-    <register addr="42" name="expTime" type="integer" bitlen="24" min="0" max="16777216" val="1088" step="50" bigstep="200"/>
+    <register addr="42" name="expTime" type="integer" bitlen="24" min="0" max="16777215" val="1088" step="50" bigstep="200"/>
     <register addr="80" name="channelEn" type="bool" bitlen="19">
         <bit id="0" name="ch1" val="1"/>
         <bit id="1" name="ch2" val="1"/>

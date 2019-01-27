@@ -11,10 +11,20 @@ public class NetCom {
     private int port = 8888;
     private String address = "127.0.0.1";
 
+    private DatagramSocket sock;
+
+    public  NetCom() {
+        try {
+            sock = new DatagramSocket();
+        } catch (SocketException ex) {
+
+        }
+    }
+
     private Map<Integer, Integer> dataForTransfer = new HashMap<>();
 
     public void sendPacket() {
-        try(DatagramSocket sock = new DatagramSocket()) {
+        //try(DatagramSocket sock = new DatagramSocket()) {
             List<Short> transferData = prepareTransferBuffer();
             byte[] b = new byte[transferData.size() * 2 + 1];
             int idx = 0;
@@ -23,12 +33,14 @@ public class NetCom {
                 b[idx++] = (byte)(addressData >> 8);
                 b[idx++] = (byte)(addressData & 0xFF);
             }
-            DatagramPacket  dp = new DatagramPacket(b , b.length , InetAddress.getByName(address) , port);
+            try {
+                DatagramPacket dp = new DatagramPacket(b, b.length, InetAddress.getByName(address), port);
+
             sock.send(dp);
-        } catch (SocketException ex) {
-            int a = 1;
+     //   } catch (SocketException ex) {
+     //       int a = 1;
         } catch (UnknownHostException ex) {
-            int b = 1;
+            int bv = 1;
         } catch (IOException ex) {
             int c = 1;
         }
