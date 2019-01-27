@@ -1,0 +1,27 @@
+<?xml  version="1.0" encoding="UTF-8"?>
+<root>
+    <network ip="127.0.0.1" port="8888"/>
+    <register addr="1" name="numberLines" type="integer" bitlen="16" min="1" max="1088" val="1088" step="1" bigstep="50"/>
+    <register addr="42" name="expTime" type="integer" bitlen="24" min="0" max="16777216" val="1088" step="50" bigstep="200"/>
+    <register addr="80" name="channelEn" type="bool" bitlen="19">
+        <bit id="0" name="ch1" val="1"/>
+        <bit id="1" name="ch2" val="1"/>
+        <bit id="2" name="ch3" val="1"/>
+        <bit id="3" name="ch4" val="1"/>
+        <bit id="4" name="ch5" val="1"/>
+        <bit id="5" name="ch6" val="1"/>
+        <bit id="6" name="ch7" val="1"/>
+        <bit id="7" name="ch8" val="1"/>
+        <bit id="8" name="ch9" val="1"/>
+        <bit id="9" name="ch10" val="1"/>
+        <bit id="10" name="ch11" val="1"/>
+        <bit id="11" name="ch12" val="1"/>
+        <bit id="12" name="ch13" val="1"/>
+        <bit id="13" name="ch14" val="1"/>
+        <bit id="14" name="ch15" val="1"/>
+        <bit id="15" name="ch16" val="1"/>
+        <bit id="16" name="ctl1" val="1"/>
+        <bit id="17" name="ct12" val="1"/>
+        <bit id="18" name="ct13" val="1"/>
+    </register>
+</root>
