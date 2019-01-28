@@ -35,6 +35,9 @@ public class CMV2000Frame extends JFrame {
                     if (item instanceof CMV2000IntegerParameters) {
                         Map<Integer, Integer> transferData = ((CMV2000IntegerParameters) item).getTransferData();
                         communication.addTransferData(transferData);
+                    } else if (item instanceof CMV2000BooleanParameters) {
+                        Map<Integer, Integer> transferData = ((CMV2000BooleanParameters)item).getTransferData();
+                        communication.addTransferData(transferData);
                     }
                 }
                 communication.sendPacket();
@@ -54,6 +57,10 @@ public class CMV2000Frame extends JFrame {
         for(Object item : data) {
             if (item instanceof CMV2000IntegerParameters) {
                 GUIParameterInteger prm = new GUIParameterInteger((CMV2000IntegerParameters)item);
+                JPanel panel = prm.generateUI();
+                mainPanel.add(panel);
+            } else if (item instanceof CMV2000BooleanParameters) {
+                GUIParameterBoolean prm = new GUIParameterBoolean((CMV2000BooleanParameters)item);
                 JPanel panel = prm.generateUI();
                 mainPanel.add(panel);
             }

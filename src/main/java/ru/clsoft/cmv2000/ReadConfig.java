@@ -44,7 +44,7 @@ public class ReadConfig {
         path = xpfactory.newXPath();
     }
 
-    private void configure(Map<String, String> opt) {
+    private void configure(Map<String, String> opt, List<CMV2000BoleanItem> bits) {
         String registerType = opt.get("type");
         switch (registerType) {
             case "integer":
@@ -53,6 +53,9 @@ public class ReadConfig {
                 parameters.add(newIntegerParameter);
                 break;
             case "bool":
+                CMV2000BooleanParameters newBooleanParameter = new CMV2000BooleanParameters();
+                newBooleanParameter.setFromMap(opt, bits);
+                parameters.add(newBooleanParameter);
                 break;
         }
     }
@@ -113,16 +116,49 @@ public class ReadConfig {
 
         NodeList list = (NodeList)evalResult;
         for(int i = 0; i < list.getLength(); i++) {
+            int j = 0;
             Map<String, String> mapAttr = new HashMap<>();
+            List<CMV2000BoleanItem> bits = new ArrayList<>();
             Node item = list.item(i);
             NamedNodeMap attribs = item.getAttributes();
-            for(int j = 0; j < attribs.getLength(); j++) {
+            for(j = 0; j < attribs.getLength(); j++) {
                 Node attrib = attribs.item(j);
                 String attrName = attrib.getNodeName();
                 String attrVal = attrib.getNodeValue();
                 mapAttr.put(attrName, attrVal);
             }
-            configure(mapAttr);
+            NodeList children = item.getChildNodes();
+            for(j = 0; j < children.getLength(); j++) {
+                Node child = children.item(j);
+                if (child.getNodeName().compareTo("bit") != 0) continue;
+                attribs = child.getAttributes();
+                Map<String, String> mapBit = new HashMap<>();
+                for(int k = 0; k < attribs.getLength(); k++) {
+                    Node attrib = attribs.item(k);
+                    String attrName = attrib.getNodeName();
+                    String attrVal = attrib.getNodeValue();
+                    mapBit.put(attrName, attrVal);
+                }
+                String strId = mapBit.get("id");
+                String strName = mapBit.get("name");
+                String strVal = mapBit.get("val");
+                int id = 0;
+                try {
+                    id = Integer.parseInt(strId);
+                } catch (NumberFormatException ex) {
+                }
+                int val = 0;
+                try {
+                    val = Integer.parseInt(strVal);
+                } catch (NumberFormatException ex) {
+                }
+                CMV2000BoleanItem boleanItem = new CMV2000BoleanItem();
+                boleanItem.setId(id);
+                boleanItem.setName(strName);
+                boleanItem.setVal(val != 0);
+                bits.add(boleanItem);
+            }
+            configure(mapAttr, bits);
         }
     }
 }

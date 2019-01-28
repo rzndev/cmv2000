@@ -22,6 +22,6 @@
         <bit id="15" name="ch16" val="1"/>
         <bit id="16" name="ctl1" val="1"/>
         <bit id="17" name="ct12" val="1"/>
-        <bit id="18" name="ct13" val="1"/>
+        <bit id="18" name="ct13" val="0"/>
     </register>
 </root>

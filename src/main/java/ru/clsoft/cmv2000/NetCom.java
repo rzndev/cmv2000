@@ -2,10 +2,7 @@ package ru.clsoft.cmv2000;
 
 import java.io.IOException;
 import java.net.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class NetCom {
     private int port = 8888;
@@ -21,7 +18,7 @@ public class NetCom {
         }
     }
 
-    private Map<Integer, Integer> dataForTransfer = new HashMap<>();
+    private Map<Integer, Integer> dataForTransfer = new TreeMap<>();
 
     public void sendPacket() {
         //try(DatagramSocket sock = new DatagramSocket()) {
